@@ -9,11 +9,12 @@ export const GETTokenInfo = expressAsyncHandler(async (req, res) => {
   const symbol = await token.symbol();
   const totalSupply = await token.totalSupply();
   const decimals = await token.decimals();
-
-  res.status(200).send({
+  const data = {
     name: name,
     symbol: symbol,
     totalSupply: ethers.formatEther(totalSupply.toString()),
-    decimals: decimals,
-  });
+    decimals: String(decimals),
+  };
+
+  res.status(200).send(data);
 });
